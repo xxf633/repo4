@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdn.bootcss.com/angular.js/1.5.6/angular.min.js"></script>
+    <script>
+        var app=angular.module('bookstore',[]);
+        app.controller('BookController',function ($scope,$http) {
+            $scope.findAll=function () {
+                $http.get("../good/findAll").success(
+                    function (response) {
+                        $scope.list=response;
+                    }
+                )
+            }
+        })
+    </script>
+</head>
+<body ng-app="bookstore" ng-controller="BookController" ng-init="findAll()">
+<table>
+    <tr>
+        <td>编号</td>
+        <td>浏览量</td>
+        <td>书名</td>
+        <td>类型</td>
+        <td>评论数</td>
+    </tr>
+    <tr ng-repeat="entity in list">
+        <td>{{entity.bid}}</td>
+        <td>{{entity.blook}}</td>
+        <td>{{entity.bname}}</td>
+        <td>{{entity.btype}}</td>
+        <td>{{entity.bcomnum}}</td>
+
+
+    </tr>
+</table>
+</body>
+</html>
